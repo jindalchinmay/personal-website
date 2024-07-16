@@ -55,6 +55,10 @@ h1 {
     max-width: 30vw;
 }
 
+#about-me span {
+    color: #3498db;
+}
+
 #image-track > .image-container > .image {
     width: 40vmin;
     height: 56vmin;
