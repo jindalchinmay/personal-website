@@ -47,7 +47,7 @@ function updateTrackPosition() {
     }, { duration: 1200, fill: "forwards" });
 
     content.animate({
-        transform: `translate(${percentage * 4}%, -50%)`
+        transform: `translate(${percentage * 5.75}%, -50%)`
     }, { duration: 1200, fill: "forwards" });
 
     for (const image of images) {
