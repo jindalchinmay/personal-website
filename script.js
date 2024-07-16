@@ -1,6 +1,8 @@
 const track = document.getElementById("image-track");
 const content = document.getElementById("content");
-const images = track.getElementsByClassName("image");
+const images = document.querySelectorAll(".image");
+const seeMoreButtons = document.querySelectorAll(".see-more");
+
 let mouseDownAt = 0;
 let prevPercentage = 0;
 let percentage = 0;
@@ -45,12 +47,12 @@ function updateTrackPosition() {
     }, { duration: 1200, fill: "forwards" });
 
     content.animate({
-        transform: `translate(${percentage}%, -50%)`
+        transform: `translate(${percentage * 4}%, -50%)`
     }, { duration: 1200, fill: "forwards" });
 
     for (const image of images) {
         image.animate({
-            objectPosition: `${100 + percentage}% center`
+            objectPosition: `${100 + percentage * 2}% center`
         }, { duration: 1200, fill: "forwards" });
     }
 }
@@ -61,8 +63,11 @@ function updatePageNumber() {
     pageNumber.textContent = currentPage;
 }
 
-for (const image of images) {
-    image.addEventListener("click", () => enlargeImage(image));
+for (const button of seeMoreButtons) {
+    button.addEventListener("click", e => {
+        const image = e.target.previousElementSibling;
+        enlargeImage(image);
+    });
 }
 
 function enlargeImage(clickedImage) {
@@ -103,6 +108,7 @@ function enlargeImage(clickedImage) {
     }, 50);
 
     setTimeout(() => {
+        enlargedImage.style.transform = "scale(1.2)";
         enlargedImage.style.filter = "blur(5px)";
         textContainer.style.opacity = "1";
     }, 500);
