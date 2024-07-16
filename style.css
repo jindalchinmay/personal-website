@@ -1,7 +1,7 @@
 body {
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(120deg, rgb(37, 150, 190), rgb(255, 223, 186));
+    background: linear-gradient(120deg, rgb(0, 0, 0), rgb(0, 0, 0));
     margin: 0;
     overflow: hidden;
     font-family: 'Roboto Mono', monospace;
