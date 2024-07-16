@@ -47,12 +47,12 @@ function updateTrackPosition() {
     }, { duration: 1200, fill: "forwards" });
 
     content.animate({
-        transform: `translate(${percentage * 2}%, -50%)`
+        transform: `translate(${percentage * 4}%, -50%)`
     }, { duration: 1200, fill: "forwards" });
 
     for (const image of images) {
         image.animate({
-            objectPosition: `${100 + percentage}% center`
+            objectPosition: `${100 + percentage * 2}% center`
         }, { duration: 1200, fill: "forwards" });
     }
 }
@@ -94,12 +94,18 @@ function enlargeImage(clickedImage) {
     closeButton.textContent = "×";
     closeButton.onclick = closeEnlargedView;
 
+    const arrow = document.createElement("div");
+    arrow.className = "blinking-arrow";
+    arrow.innerHTML = "&#8595;";
+    arrow.onclick = () => handleScroll(enlargedImage, textContainer, arrow);
+
     textContainer.appendChild(titleElement);
     textContainer.appendChild(descriptionElement);
 
     enlargedView.appendChild(enlargedImage);
     enlargedView.appendChild(textContainer);
     enlargedView.appendChild(closeButton);
+    enlargedView.appendChild(arrow);
 
     document.body.appendChild(enlargedView);
 
@@ -108,9 +114,20 @@ function enlargeImage(clickedImage) {
     }, 50);
 
     setTimeout(() => {
-        enlargedImage.style.filter = "blur(5px)";
-        textContainer.style.opacity = "1";
+        enlargedImage.style.transform = "scale(1.1)";
+        arrow.style.opacity = "1";
     }, 500);
+}
+
+function handleScroll(image, textContainer, arrow) {
+    window.addEventListener("scroll", function onScroll() {
+        if (window.scrollY > 50) {
+            image.style.filter = "blur(5px)";
+            textContainer.style.opacity = "1";
+            arrow.style.display = "none";
+            window.removeEventListener("scroll", onScroll);
+        }
+    });
 }
 
 function closeEnlargedView() {
@@ -120,13 +137,5 @@ function closeEnlargedView() {
         setTimeout(() => {
             enlargedView.remove();
         }, 500);
-    }
-}
-
-document.addEventListener("keydown", handleKeyPress);
-
-function handleKeyPress(e) {
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-        closeEnlargedView();
     }
 }
