@@ -20,7 +20,7 @@ const imageData = [
     { title: "Project 5", description: "Description for Project 5" },
     { title: "Project 6", description: "Description for Project 6" },
     { title: "Project 7", description: "Description for Project 7" },
-    { title: "music is the language of creativity", description: "Description for Project 8" }
+    { title: "Project 8", description: "theres something about music that drives me. " }
 ];
 
 // Initialize the track position and image positions
@@ -87,7 +87,7 @@ function showEasterEgg() {
     if (!easterEgg) {
         easterEgg = document.createElement("div");
         easterEgg.id = "easter-egg";
-        easterEgg.textContent = "i also like math";
+        easterEgg.textContent = "dogs are cool too";
         easterEgg.style.position = "fixed";
         easterEgg.style.right = "20px";
         easterEgg.style.bottom = "20px";
@@ -159,13 +159,13 @@ function enlargeImage(clickedImage) {
 
     setTimeout(() => {
         enlargedImage.style.transform = "scale(1.2)";
-        enlargedImage.style.filter = "blur(5px)";
+        enlargedImage.style.filter = "blur(7px)";
         textContainer.style.opacity = "1";
         
         // Animate the 'X' button
         //closeButton.style.transition = "all 0.5s ease";
         //closeButton.style.transform = "translate(5rem, -3.5rem)";
-    }, 2000);
+    }, 1500);
 }
 
 function closeEnlargedView() {
