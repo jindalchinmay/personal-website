@@ -7,16 +7,16 @@ body {
     font-family: 'Roboto Mono', monospace;
     color: white;
     user-select: none;
-    transition: background 1s ease, color 1s ease;
+    transition: background 2s ease-in, color 2s ease-in;
     cursor: crosshair;
 }
 
 body.light-mode {
-    background: #2980B9;
-    background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
-    background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: black;
-    transition: background 1s ease, color 1s ease;
+    transition: background 2s ease-in, color 2s ease-in;
 }
 
 #content {
@@ -26,7 +26,7 @@ body.light-mode {
     transform: translateY(-50%);
     z-index: 1000;
     width: 30vw;
-    transition: color 1s ease; /* Added opacity transition */
+    transition: color 2s ease-in; /* Added opacity transition */
     opacity: 1;
 }
 
@@ -55,19 +55,23 @@ h1 {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
-    transition: opacity 1s ease;
+    transition: opacity 1.22s ease-in;
 }
 
 #social-icons img {
     width: 2rem;
     height: 2rem;
-    transition: opacity 1s ease;
+    transition: opacity 1.22s ease-in;
+}
+
+#social-icons img.instant-disappear {
+    transition: none; /* Override the existing transition */
 }
 
 #about-me {
     font-size: 1.2rem;
     max-width: 30vw;
-    transition: color 1s ease;
+    /* transition: color 2s ease; */
 }
 
 #about-me span {
@@ -96,6 +100,7 @@ body.light-mode #about-me span {
     transform: translateX(-50%);
     font-size: 1.5rem;
     z-index: 1000;
+    transition: color 1.2s ease-in;
 }
 
 #page-number .current {
@@ -185,7 +190,7 @@ body.light-mode #mode-text {
 #dark-mode-toggle {
     font-size: 1.5rem;
     cursor: pointer;
-    transition: opacity 1s ease;
+    transition: opacity 2s ease-in;
 }
 
 .text-fade-out {

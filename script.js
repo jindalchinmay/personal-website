@@ -199,21 +199,38 @@ darkModeToggle.addEventListener("click", () => {
     }, 3000);  // Duration of the transition
 });
 
+
 function updateDarkMode() {
     document.body.classList.toggle("light-mode", !isDarkMode);
 
     const icons = document.querySelectorAll("#social-icons img");
+
+    function makeIconsDisappear() {
+        icons.forEach(icon => {
+            // Add a class to override the transition
+            icon.classList.add('instant-disappear');
+            icon.style.opacity = "0"; // Set opacity to 0 for instant disappearance
+        });
+    }
+    
+    // Function to make icons fade back in
+    function makeIconsFadeIn() {
+        icons.forEach(icon => {
+            // Remove the class to revert back to CSS transition
+            icon.classList.remove('instant-disappear');
+            icon.style.opacity = "1"; // Set opacity to 1 for fade-in effect
+        });
+    }
+
     icons.forEach(icon => {
         const src = icon.src;
         icon.src = isDarkMode ? src.replace('.svg', '2.svg') : src.replace('2.svg', '.svg');
-        icon.style.opacity = "0";  // Hide icons initially
+        makeIconsDisappear();  // Hide icons initially
     });
 
     setTimeout(() => {
-        icons.forEach(icon => {
-            icon.style.opacity = "1";  // Fade in icons after a delay
-        });
-    }, 3000);  // Delay for icons fade-in to sync with background transition
+        makeIconsFadeIn();
+    }, 2000);  // Delay for icons fade-in to sync with background transition
 
     const darkModeToggle = document.getElementById("dark-mode-toggle");
     darkModeToggle.textContent = isDarkMode ? "🔆" : "🌑";
