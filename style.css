@@ -7,6 +7,15 @@ body {
     font-family: 'Roboto Mono', monospace;
     color: white;
     user-select: none;
+    transition: background 1s ease, color 1s ease;
+    cursor: crosshair;
+}
+
+body.light-mode {
+    background: #2980B9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: black;
 }
 
 #content {
@@ -16,6 +25,7 @@ body {
     transform: translateY(-50%);
     z-index: 1000;
     width: 30vw;
+    transition: color 1s ease;
 }
 
 #image-track {
@@ -43,6 +53,7 @@ h1 {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
+    transition: opacity 1s ease;
 }
 
 #social-icons img {
@@ -53,32 +64,24 @@ h1 {
 #about-me {
     font-size: 1.2rem;
     max-width: 30vw;
+    transition: color 1s ease;
 }
 
 #about-me span {
     color: #3498db;
 }
 
+body.light-mode #about-me span {
+    color: #c950b3;
+}
+
 #image-track > .image-container > .image {
     width: 40vmin;
     height: 56vmin;
     object-fit: cover;
-    object-position: 0% 50%; /* start at the left */
-    cursor: pointer;
+    object-position: 100% 50%;
+    cursor: crosshair;
     transition: object-position 0.6s ease;
-}
-
-#crosshair {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 15px;
-    height: 15px;
-    border: 2px solid rgba(172, 186, 186, 0.711);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 1001;
 }
 
 #page-number {
@@ -137,8 +140,8 @@ h1 {
 
 #enlarged-view .close-button {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 1vw;
+    right: 4vh;
     font-size: 3rem;
     cursor: pointer;
 }
@@ -155,28 +158,38 @@ h1 {
     font-family: 'Roboto Mono', monospace;
 }
 
-.overlay-text {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 139, 0.7);
-    color: white;
-    padding: 0.2rem 0.5rem;
-    font-family: 'Roboto Mono', monospace;
+#mode-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1001;
 }
 
-.blinking-arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
+#mode-text {
+    font-size: 1rem;
+    margin-right: 10px;
     color: white;
-    animation: blink 1s infinite;
+}
+
+body.light-mode #mode-text {
+    color: black;
+}
+
+#dark-mode-toggle {
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.text-fade-out {
+    color: transparent !important;
+}
+
+.text-fade-in {
+    color: black !important;
+}
+
+.icon-hidden {
+    opacity: 0;
 }
