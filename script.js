@@ -10,6 +10,7 @@ let prevPercentage = 0;  // Start at -100% to align images to the right
 let percentage = 0;  // Start at -100% to align images to the right
 let currentPage = 1;  // Start at the last page
 let isDarkMode = true;  // Start in dark mode
+let transitionInProgress = false;  // Variable to track transition state
 
 const imageData = [
     { title: "Project 1", description: "Description for Project 1" },
@@ -187,18 +188,33 @@ function handleKeyPress(e) {
 
 // Dark mode toggle functionality
 darkModeToggle.addEventListener("click", () => {
+    if (transitionInProgress) return;  // Prevent toggle during transition
+
     isDarkMode = !isDarkMode;
+    transitionInProgress = true;
     updateDarkMode();
+
+    setTimeout(() => {
+        transitionInProgress = false;
+    }, 3000);  // Duration of the transition
 });
 
 function updateDarkMode() {
     document.body.classList.toggle("light-mode", !isDarkMode);
+
     const icons = document.querySelectorAll("#social-icons img");
     icons.forEach(icon => {
         const src = icon.src;
         icon.src = isDarkMode ? src.replace('.svg', '2.svg') : src.replace('2.svg', '.svg');
+        icon.style.opacity = "0";  // Hide icons initially
     });
-    
+
+    setTimeout(() => {
+        icons.forEach(icon => {
+            icon.style.opacity = "1";  // Fade in icons after a delay
+        });
+    }, 3000);  // Delay for icons fade-in to sync with background transition
+
     const darkModeToggle = document.getElementById("dark-mode-toggle");
     darkModeToggle.textContent = isDarkMode ? "🔆" : "🌑";
 }
